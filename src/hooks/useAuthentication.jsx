@@ -25,6 +25,7 @@ export const useAuthentication = () => {
     }
   }
 
+  // register
   const createUser = async (data) => {
     checkIfIsCancelled();
 
@@ -63,6 +64,40 @@ export const useAuthentication = () => {
     }
   };
 
+  // logout
+  const logout = () => {
+    checkIfIsCancelled();
+
+    signOut(auth);
+  };
+
+  // sign in
+  const login = async (data) => {
+    checkIfIsCancelled();
+
+    setLoading(true);
+    setError(false);
+
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      setLoading(false);
+    } catch (error) {
+      console.log(error.code);
+      console.log(error.message);
+
+      let systemErrorMessage;
+
+      if (error.message.includes("invalid-credential")) {
+        systemErrorMessage = "Invalid credential.";
+      } else {
+        systemErrorMessage = "Error, please try later.";
+      }
+
+      setError(systemErrorMessage);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     return () => setCancelled(true);
   }, []);
@@ -72,5 +107,7 @@ export const useAuthentication = () => {
     createUser,
     error,
     loading,
+    logout,
+    login,
   };
 };
