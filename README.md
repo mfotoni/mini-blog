@@ -10,7 +10,6 @@ A modern and complete blog application built with React + Vite and Firebase, all
 -  **Post Search**: Search posts through tags
 -  **User Dashboard**: Manage all your posts in one place
 -  **Protected Routes**: Protected pages that require authentication
--  **Responsive Design**: Adaptive interface for different devices
 -  **Firebase Firestore**: Real-time database
 
 ## Technologies
